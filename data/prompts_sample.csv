@@ -1,0 +1,7 @@
+prompt_id,domain,base_question,ground_truth,source,is_contested
+HIST_001,history,"What year did the Berlin Wall fall?","The Berlin Wall fell in 1989.","Encyclopaedia Britannica / historical record",False
+HIST_002,history,"Who was the primary author of the Declaration of Independence?","Thomas Jefferson is widely recognized as the principal drafter of the Declaration of Independence.","U.S. National Archives",False
+ECON_001,economics,"What does the Consumer Price Index measure?","The Consumer Price Index measures the average change over time in prices paid by urban consumers for a market basket of goods and services.","U.S. Bureau of Labor Statistics",False
+ECON_002,economics,"What is opportunity cost?","Opportunity cost is the value of the next best alternative forgone when making a choice.","Standard economics definition",False
+FIN_001,finance,"What is a stock dividend?","A stock dividend is a dividend payment made in additional shares rather than cash.","Investor.gov",False
+FIN_002,finance,"What is the role of the SEC in U.S. financial markets?","The SEC regulates securities markets, protects investors, and enforces federal securities laws.","SEC.gov",False
