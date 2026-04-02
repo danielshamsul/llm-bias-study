@@ -20,7 +20,7 @@ def build_parser() -> argparse.ArgumentParser:
     run_parser.add_argument(
         "--models",
         nargs="+",
-        choices=["openai", "anthropic", "xai", "mock"],
+        choices=["openai", "anthropic", "xai", "gemini", "mock"],
         help="Optional subset of providers to run",
     )
 
