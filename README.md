@@ -6,7 +6,7 @@ It supports:
 
 - a structured prompt library,
 - multiple prompting strategies,
-- response collection from OpenAI, Anthropic, and xAI,
+- response collection from OpenAI, Anthropic, xAI, and Gemini,
 - an offline `mock` mode for testing without API keys,
 - manual scoring with a rubric,
 - summary outputs for later analysis.
@@ -136,11 +136,14 @@ Example:
 OPENAI_API_KEY=your_openai_key
 ANTHROPIC_API_KEY=your_anthropic_key
 XAI_API_KEY=your_xai_key
+GEMINI_API_KEY=your_gemini_api_key
 MOCK_ENABLED=true
 MOCK_MODEL=demo-model
 OPENAI_MODEL=gpt-4.1
 ANTHROPIC_MODEL=claude-3-5-sonnet-latest
 XAI_MODEL=grok-2-latest
+GEMINI_MODEL=gemini-2.5-flash
+GEMINI_API_VERSION=v1beta
 OUTPUT_DIR=outputs
 ```
 
@@ -156,11 +159,18 @@ Or only selected ones:
 python -m llm_bias_study.cli run --prompt-file data/prompts_sample.csv --models openai anthropic
 ```
 
+To test Gemini by itself:
+
+```powershell
+python -m llm_bias_study.cli run --prompt-file data/prompts_sample.csv --models gemini
+```
+
 Notes:
 
 - If an API key is blank, that provider will be skipped.
 - `mock` can stay enabled even when real APIs are enabled.
 - Model names may change over time depending on provider availability.
+- Gemini support in this project uses Google's official `generateContent` API with API-key authentication.
 
 ## Prompt Library Format
 
