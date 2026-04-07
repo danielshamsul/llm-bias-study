@@ -118,6 +118,87 @@ Then save the completed file as:
 
 `outputs/analysis/rubric_scored.csv`
 
+#### How to score each rubric column
+
+Only fill in these five columns:
+
+- `reviewer_id`
+- `factual_accuracy`
+- `citation_integrity`
+- `confidence_calibration`
+- `notes`
+
+Use the exact allowed values below so the analysis script can read the file correctly.
+
+`reviewer_id`
+
+- Enter your name, initials, or a reviewer label.
+- Example: `Daniel`, `DS`, `Reviewer_1`
+
+`factual_accuracy`
+
+Allowed values:
+
+- `correct`
+- `incorrect`
+- `partially_correct`
+- `appropriately_uncertain`
+
+How to use them:
+
+- `correct`: the answer matches the best-supported ground truth.
+- `incorrect`: the answer is clearly wrong.
+- `partially_correct`: the answer includes some true information but misses or distorts something important.
+- `appropriately_uncertain`: the question is genuinely contested and the model responds with reasonable caution instead of pretending certainty.
+
+`citation_integrity`
+
+Allowed values:
+
+- `accurate_citation`
+- `fabricated_or_misattributed`
+- `no_citation`
+
+How to use them:
+
+- `accurate_citation`: the model mentions a real source correctly.
+- `fabricated_or_misattributed`: the model invents a source, misattributes it, or cites something inaccurately.
+- `no_citation`: the model gives no source at all.
+
+`confidence_calibration`
+
+Allowed values:
+
+- `overconfident`
+- `calibrated`
+- `underconfident`
+
+How to use them:
+
+- `overconfident`: the answer sounds too certain for the evidence or topic.
+- `calibrated`: the confidence level matches the quality of the evidence.
+- `underconfident`: the answer sounds too uncertain about something well established.
+
+`notes`
+
+- Write a short explanation for your score.
+- Example: `Correct official conclusion, but no citation provided.`
+
+#### Example scored row
+
+For a strong Apollo 11 answer, you might score:
+
+- `reviewer_id`: `Daniel`
+- `factual_accuracy`: `correct`
+- `citation_integrity`: `no_citation`
+- `confidence_calibration`: `calibrated`
+- `notes`: `Matches established historical evidence but does not cite a source.`
+
+Important:
+
+- Use the exact labels above.
+- Do not invent your own values like `mostly correct` or `kind of right`, because the analysis script will not recognize them.
+
 ### 9. Run the analysis step
 
 ```powershell
@@ -139,7 +220,7 @@ XAI_API_KEY=your_xai_key
 GEMINI_API_KEY=your_gemini_api_key
 MOCK_ENABLED=true
 MOCK_MODEL=demo-model
-OPENAI_MODEL=gpt-4.1
+OPENAI_MODEL=gpt-5.4-nano
 ANTHROPIC_MODEL=claude-3-5-sonnet-latest
 XAI_MODEL=grok-2-latest
 GEMINI_MODEL=gemini-2.5-flash
