@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import requests
+from requests import HTTPError
 
 from .base import LLMClient
 
@@ -32,7 +33,6 @@ class GeminiClient(LLMClient):
             json={
                 "contents": [
                     {
-                        "role": "user",
                         "parts": [{"text": prompt}],
                     }
                 ],
@@ -43,10 +43,34 @@ class GeminiClient(LLMClient):
             },
             timeout=60,
         )
-        response.raise_for_status()
+        try:
+            response.raise_for_status()
+        except HTTPError as exc:
+            error_detail = _extract_error_text(response)
+            if error_detail:
+                raise RuntimeError(
+                    f"Gemini API request failed with status {response.status_code}: {error_detail}"
+                ) from exc
+            raise
         payload = response.json()
         candidates = payload.get("candidates", [])
         if not candidates:
             return ""
         parts = candidates[0].get("content", {}).get("parts", [])
         return "".join(part.get("text", "") for part in parts).strip()
+
+
+def _extract_error_text(response: requests.Response) -> str:
+    try:
+        payload = response.json()
+    except ValueError:
+        return response.text.strip()
+
+    error = payload.get("error")
+    if isinstance(error, dict):
+        message = error.get("message", "")
+        status = error.get("status", "")
+        if message and status:
+            return f"{status}: {message}"
+        return message or status
+    return response.text.strip()
