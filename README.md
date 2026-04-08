@@ -83,6 +83,26 @@ pip install -e .
 ```powershell
 Copy-Item .env.example .env
 ```
+## Using Real APIs
+
+If you want to test actual language models instead of the offline mock mode, add your API keys to `.env`.
+
+Example:
+
+```env
+OPENAI_API_KEY=your_openai_key
+ANTHROPIC_API_KEY=your_anthropic_key
+XAI_API_KEY=your_xai_key
+GEMINI_API_KEY=your_gemini_api_key
+MOCK_ENABLED=true
+MOCK_MODEL=demo-model
+OPENAI_MODEL=gpt-5.4-nano
+ANTHROPIC_MODEL=claude-3-5-sonnet-latest
+XAI_MODEL=grok-2-latest
+GEMINI_MODEL=gemini-2.5-flash
+GEMINI_API_VERSION=v1beta
+OUTPUT_DIR=outputs
+```
 
 For mock testing, leave the real API keys blank. The default file already enables offline testing.
 
@@ -219,33 +239,6 @@ python -m llm_bias_study.cli analyze --responses outputs/responses/latest_respon
 ```
 
 This creates summary files in `outputs/analysis`.
-
-## Using Real APIs
-
-If you want to test actual language models instead of the offline mock mode, add your API keys to `.env`.
-
-Example:
-
-```env
-OPENAI_API_KEY=your_openai_key
-ANTHROPIC_API_KEY=your_anthropic_key
-XAI_API_KEY=your_xai_key
-GEMINI_API_KEY=your_gemini_api_key
-MOCK_ENABLED=true
-MOCK_MODEL=demo-model
-OPENAI_MODEL=gpt-5.4-nano
-ANTHROPIC_MODEL=claude-3-5-sonnet-latest
-XAI_MODEL=grok-2-latest
-GEMINI_MODEL=gemini-2.5-flash
-GEMINI_API_VERSION=v1beta
-OUTPUT_DIR=outputs
-```
-
-Then run all configured providers:
-
-```powershell
-python -m llm_bias_study.cli run --prompt-file data/prompts_sample.csv
-```
 
 Notes:
 
