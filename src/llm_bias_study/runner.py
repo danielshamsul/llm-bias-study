@@ -4,6 +4,7 @@ from typing import Iterable
 
 from .clients.anthropic_client import AnthropicClient
 from .clients.base import LLMClient
+from .clients.gemini_client import GeminiClient
 from .clients.mock_client import MockClient
 from .clients.openai_client import OpenAIClient
 from .clients.xai_client import XAIClient
@@ -14,7 +15,7 @@ from .storage import save_responses
 
 
 def build_clients(settings: Settings, selected_models: Iterable[str] | None = None) -> dict[str, LLMClient]:
-    requested = {name.lower() for name in selected_models} if selected_models else {"openai", "anthropic", "xai", "mock"}
+    requested = {name.lower() for name in selected_models} if selected_models else {"openai", "anthropic", "xai", "gemini", "mock"}
     clients: dict[str, LLMClient] = {}
 
     if "openai" in requested and settings.openai_api_key:
@@ -37,6 +38,14 @@ def build_clients(settings: Settings, selected_models: Iterable[str] | None = No
             model_name=settings.xai_model,
             temperature=settings.temperature,
             max_tokens=settings.max_tokens,
+        )
+    if "gemini" in requested and settings.gemini_api_key:
+        clients["gemini"] = GeminiClient(
+            api_key=settings.gemini_api_key,
+            model_name=settings.gemini_model,
+            temperature=settings.temperature,
+            max_tokens=settings.max_tokens,
+            api_version=settings.gemini_api_version,
         )
     if "mock" in requested and settings.mock_enabled:
         clients["mock"] = MockClient(
