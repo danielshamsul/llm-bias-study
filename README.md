@@ -240,10 +240,10 @@ Or only selected ones:
 python -m llm_bias_study.cli run --prompt-file data/prompts_sample.csv --models openai anthropic
 ```
 
-To test Gemini by itself:
+To test OpenAI by itself:
 
 ```powershell
-python -m llm_bias_study.cli run --prompt-file data/prompts_sample.csv --models gemini
+python -m llm_bias_study.cli run --prompt-file data/prompts_sample.csv --models openai
 ```
 
 Notes:
