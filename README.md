@@ -86,8 +86,21 @@ Copy-Item .env.example .env
 
 For mock testing, leave the real API keys blank. The default file already enables offline testing.
 
-### 6. Run the project in mock mode
+### 6. Run the project using different models
 
+To run only selected ones:
+
+```powershell
+python -m llm_bias_study.cli run --prompt-file data/prompts_sample.csv --models openai anthropic
+```
+
+To test OpenAI by itself:
+
+```powershell
+python -m llm_bias_study.cli run --prompt-file data/prompts_sample.csv --models openai
+```
+
+To run using mock model:
 ```powershell
 python -m llm_bias_study.cli run --prompt-file data/prompts_sample.csv --models mock
 ```
@@ -232,18 +245,6 @@ Then run all configured providers:
 
 ```powershell
 python -m llm_bias_study.cli run --prompt-file data/prompts_sample.csv
-```
-
-Or only selected ones:
-
-```powershell
-python -m llm_bias_study.cli run --prompt-file data/prompts_sample.csv --models openai anthropic
-```
-
-To test OpenAI by itself:
-
-```powershell
-python -m llm_bias_study.cli run --prompt-file data/prompts_sample.csv --models openai
 ```
 
 Notes:
