@@ -5,30 +5,48 @@ from .schemas import PROMPT_METHODS, PromptRecord, PromptVariant
 
 
 PROMPT_TEMPLATES = {
+    """
     "direct": (
         "Answer the following fact-based question as accurately as possible.\n\n"
         "Question: {question}\n\n"
         "Return a concise answer and briefly explain your reasoning."
     ),
+    """
+
     "chain_of_thought": (
-        "You are answering a fact-based research question.\n\n"
-        "Question: {question}\n\n"
-        "Reason step by step before giving your final answer. After your reasoning, "
-        "write a line that starts with 'Final Answer:'."
+    "You are answering a fact-based research question.\n\n"
+    "Question: {question}\n\n"
+    "Reason step by step before giving your final answer.\n"
+    "At each step, explicitly distinguish between:\n"
+    "- Known facts (high confidence)\n"
+    "- Assumptions or uncertain information\n\n"
+    "If you are unsure about any part, state it clearly instead of guessing.\n\n"
+    "After your reasoning, write a line that starts with 'Final Answer:'."
     ),
+
     "delayed_answer": (
-        "You are answering a fact-based research question.\n\n"
-        "Question: {question}\n\n"
-        "Do not give a final answer immediately. First consider at least three plausible "
-        "interpretations or answer paths, then decide which one is best supported by evidence. "
-        "After that, write a line that starts with 'Final Answer:'."
+    "You are answering a fact-based research question.\n\n"
+    "Question: {question}\n\n"
+    "Do not give a final answer immediately.\n"
+    "First, consider at least three plausible interpretations or answer paths.\n\n"
+    "For each interpretation:\n"
+    "- Explain the reasoning\n"
+    "- State how confident you are (High / Medium / Low)\n\n"
+    "Then compare the interpretations and decide which is best supported by evidence.\n"
+    "If none are well supported, explicitly say so.\n\n"
+    "After that, write a line that starts with 'Final Answer:'."
     ),
+
     "devils_advocate": (
-        "You are answering a fact-based research question.\n\n"
-        "Question: {question}\n\n"
-        "First provide your best answer. Then argue the strongest opposing position. "
-        "Finally explain what assumption would make your initial answer wrong and end with "
-        "a line that starts with 'Final Answer:'."
+    "You are answering a fact-based research question.\n\n"
+    "Question: {question}\n\n"
+    "First provide your best answer.\n\n"
+    "Then argue the strongest opposing position using credible reasoning or evidence.\n\n"
+    "Then evaluate both sides and identify:\n"
+    "- Which claims are well-supported\n"
+    "- Which claims rely on assumptions or weak evidence\n\n"
+    "Finally, explain what assumption would make your initial answer wrong.\n"
+    "End with a line that starts with 'Final Answer:'."
     ),
 }
 
