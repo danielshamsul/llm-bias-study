@@ -80,6 +80,10 @@ def build_prompt_variants(records: list[PromptRecord]) -> list[PromptVariant]:
     variants: list[PromptVariant] = []
     for record in records:
         for method in PROMPT_METHODS:
+            if method not in PROMPT_TEMPLATES:
+                raise ValueError(
+                    f"Prompt method '{method}' is listed in PROMPT_METHODS but has no template."
+                )
             template = PROMPT_TEMPLATES[method]
             variants.append(
                 PromptVariant(

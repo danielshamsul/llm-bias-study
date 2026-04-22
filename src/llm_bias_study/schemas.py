@@ -5,7 +5,6 @@ from datetime import datetime, timezone
 
 
 PROMPT_METHODS = (
-    "direct",
     "chain_of_thought",
     "delayed_answer",
     "devils_advocate",
