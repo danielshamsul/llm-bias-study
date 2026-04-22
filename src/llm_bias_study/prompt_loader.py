@@ -5,14 +5,6 @@ from .schemas import PROMPT_METHODS, PromptRecord, PromptVariant
 
 
 PROMPT_TEMPLATES = {
-    """
-    "direct": (
-        "Answer the following fact-based question as accurately as possible.\n\n"
-        "Question: {question}\n\n"
-        "Return a concise answer and briefly explain your reasoning."
-    ),
-    """
-
     "chain_of_thought": (
     "You are answering a fact-based research question.\n\n"
     "Question: {question}\n\n"
